@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import GlobalStyles from '@mui/material/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
@@ -8,11 +8,13 @@ import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { CartComponent } from "./Cart/Cart";
+import { CartContext } from "../../contexts/CartContext";
 
 const Header = () => {
-  const [display, setDisplay] = React.useState(false);
+  
+  const {displayCart, setDisplayCart} = useContext(CartContext);
   const toggleDisplay = () => {
-    setDisplay(!display);
+    setDisplayCart(!displayCart);
   };
 
   return (
@@ -57,7 +59,7 @@ const Header = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <CartComponent display={display}/>
+      <CartComponent/>
     </>
   );
 }

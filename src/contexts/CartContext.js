@@ -3,9 +3,14 @@ import React, { useState } from "react";
 const CartContext = React.createContext({});
 
 const CartProvider = ({children}) => {
+    //Cart Items
     const [cart, setCart] = useState({});
 
-    const [cartLength, setCartLength] = useState(0);
+    //Cart Total
+    const [cartTotal, setCartTotal] = useState(0);
+
+    //Cart Display
+    const [displayCart, setDisplayCart] = useState(false);
 
     const addProduct = (product) => {
         let newCart = cart;
@@ -18,8 +23,8 @@ const CartProvider = ({children}) => {
         }
 
         setCart(newCart);
+        setCartTotal(cartTotal + product.price);
 
-        setCartLength(cartLength + 1);
         console.log("Carrito: \n", newCart);
     }
 
@@ -28,10 +33,11 @@ const CartProvider = ({children}) => {
     const removeProduct = (id) => {
         console.log("delete product: ", id);
         let newCart = cart;
-        delete newCart[id];
 
+        setCartTotal(cartTotal - (newCart[id].price * newCart[id].quantity));
+
+        delete newCart[id];
         setCart(newCart);
-        setCartLength(cartLength - 1);
     }
 
     return(
@@ -40,7 +46,9 @@ const CartProvider = ({children}) => {
             addProduct,
             clearCart,
             removeProduct,
-            cartLength
+            cartTotal,
+            displayCart,
+            setDisplayCart
         }}>
             {children}
         </CartContext.Provider>

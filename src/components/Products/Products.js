@@ -12,10 +12,17 @@ import {products} from '../../dataBase.js'
 
 const Products = () => {
 
-  let {addProduct} = useContext(CartContext);
+  let {addProduct, cart} = useContext(CartContext);
 
   let addProductClick = (product) => {
     addProduct(product);
+  }
+
+  let checkAmmount = (id, amount) => {
+    if (!cart[id])
+      return amount;
+    
+    return amount - cart[id].quantity;
   }
 
   return (
@@ -36,7 +43,7 @@ const Products = () => {
                   Precio: $ {value.price}
                 </Typography>
                 <Typography>
-                  Cantidad Disponible: {value.amount}
+                  Cantidad Disponible: {checkAmmount(value.id, value.amount)}
                 </Typography>
               </CardContent>
               <CardActions 
@@ -45,9 +52,15 @@ const Products = () => {
                   justifyContent: 'center',
                 }}
               >
-                <button className="button-add-item" onClick={()=> addProductClick(value)}>
-                  <span>Añadir a Carrito</span>
-                </button>
+                {
+                  checkAmmount(value.id, value.amount) === 0 ?
+                    (<div className="without-stock">Sin Stock</div>) :
+                    (
+                      <button className="button-add-item" onClick={()=> addProductClick(value)}>
+                        <span>Añadir a Carrito</span>
+                      </button>
+                    )
+                }
               </CardActions>
             </Card>
           </Grid>
