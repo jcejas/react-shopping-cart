@@ -21,13 +21,8 @@ const Header = () => {
     <>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-      >
-        <Toolbar sx={{ flexWrap: 'wrap' }} className="custom-header">
+      <AppBar position="fixed">
+        <Toolbar className="custom-header">
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             Grow React
           </Typography>

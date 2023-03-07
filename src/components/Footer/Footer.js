@@ -6,20 +6,20 @@ import Container from '@mui/material/Container';
 
 const footers = [
     {
-        title: 'Company',
-        description: ['Team', 'History', 'Contact us']
+        title: 'Compañía',
+        description: ['Equipo', 'Historia', 'Contactanos']
     },
     {
-        title: 'Features',
-        description: ['Team feature', 'Developer stuff', 'Another one']
+        title: 'Sobre nosotros',
+        description: ['Equipo', 'Nuestros desarrolladores', 'Otros']
     },
     {
-        title: 'Resources',
-        description: ['Resource', 'Resource name', 'Final resource']
+        title: 'Recursos',
+        description: ['Documentación', 'APIs', 'Plataformas']
     },
     {
-        title: 'Legal',
-        description: ['Privacy policy', 'Terms of use']
+        title: 'Legales',
+        description: ['Políticas de privacidad', 'Términos de uso']
     },
 ];
 
@@ -40,7 +40,7 @@ const Footer = () => {
     return (
         <div className='custom-footer'>
             <Container
-                maxWidth="md"
+                maxWidth="lg"
                 component="footer"
                 sx={{
                     mt: 8,
