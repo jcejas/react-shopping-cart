@@ -4,10 +4,26 @@ const CartContext = React.createContext({});
 
 const CartProvider = ({children}) => {
     //Cart Items
-    const [cart, setCart] = useState({});
+    const [cart, setCart] = useState(() => {
+        //Save in LocalStorage
+        let cartStorage = localStorage.getItem('cart');
+        
+        if (cartStorage === null)
+            return {}
+        
+        return JSON.parse(cartStorage)
+    });
 
     //Cart Total
-    const [cartTotal, setCartTotal] = useState(0);
+    const [cartTotal, setCartTotal] = useState(() => {
+        //Save in LocalStorage
+        let cartTotalStorage = localStorage.getItem('cartTotal');
+        
+        if (cartTotalStorage === null)
+            return 0;
+        
+        return parseInt(cartTotalStorage);
+    });
 
     //Cart Display
     const [displayCart, setDisplayCart] = useState(false);
@@ -22,22 +38,33 @@ const CartProvider = ({children}) => {
             newCart[product.id].quantity = 1;
         }
 
+        let total = cartTotal + product.price;
         setCart(newCart);
-        setCartTotal(cartTotal + product.price);
+        setCartTotal(total);
 
-        console.log("Carrito: \n", newCart);
+        //Set LocalStorage
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        localStorage.setItem('cartTotal', total)
     }
 
-    const clearCart = () => setCart({})
+    const clearCart = () => {
+        setCart({});
+        setCartTotal(0);
+        localStorage.removeItem('cart');
+        localStorage.removeItem('cartTotal');
+    }
 
     const removeProduct = (id) => {
-        console.log("delete product: ", id);
         let newCart = cart;
-
-        setCartTotal(cartTotal - (newCart[id].price * newCart[id].quantity));
+        let total = cartTotal - (newCart[id].price * newCart[id].quantity);
 
         delete newCart[id];
         setCart(newCart);
+        setCartTotal(total);
+
+        //Set LocalStorage
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        localStorage.setItem('cartTotal', total)
     }
 
     return(

@@ -34,7 +34,7 @@ const Header = () => {
           <nav>
             <Link
               variant="button"
-              href="#"
+              href="/"
               sx={{ my: 1, mx: 1.5 }}
             >
               Inicio

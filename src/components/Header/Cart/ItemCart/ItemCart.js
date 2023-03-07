@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { CartContext } from '../../../../contexts/CartContext';
 
-export default function ItemCart({name, price, amount, id, image, quantity}) {
+export default function ItemCart({name, price, id, image, quantity}) {
 
   let {removeProduct} = useContext(CartContext);
 

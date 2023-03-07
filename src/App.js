@@ -1,10 +1,13 @@
 import React from "react";
-import {IndexPage} from "./pages/index.js"
+import { RouterProviderCustom } from "./routes/routes.js";
+import { CartProvider } from "./contexts/CartContext.js";
 
 function App() {
   return (
     <div className="App">
-      <IndexPage/>
+      <CartProvider>
+        <RouterProviderCustom/>
+      </CartProvider>
     </div>
   );
 }
