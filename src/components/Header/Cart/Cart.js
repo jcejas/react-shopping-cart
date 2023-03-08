@@ -5,13 +5,13 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 import ItemCart from './ItemCart/ItemCart'
 import { CartContext } from "../../../contexts/CartContext";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Typography from '@mui/material/Typography';
 
 const drawerWidth = 315;
 
 export const CartComponent = () => {
-  const {cart, cartTotal, displayCart, setDisplayCart} = useContext(CartContext);
+  const {cart, cartTotal, clearCart, displayCart, setDisplayCart} = useContext(CartContext);
 
   /*
   useEffect(() => {
@@ -54,6 +54,15 @@ export const CartComponent = () => {
             Total: ${cartTotal}
         </Typography>
       </Box>
+      <Divider />
+        {
+          cartTotal > 0 ?
+          (
+            <Button color="error" onClick={clearCart} variant="contained">
+                Limpiar Carrito
+            </Button>
+          ) : ''
+        }
     </Drawer>
   );
 }

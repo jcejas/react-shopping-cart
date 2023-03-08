@@ -30,11 +30,13 @@ const Products = () => {
         {products.map((value, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
             <Card className="product-card">
-              <CardMedia
-                component='img'
-                image={value.image}
-                alt={value.name}
-              />
+              <a href={`/product/${value.id}`}>
+                <CardMedia
+                  component='img'
+                  image={value.image}
+                  alt={value.name}
+                />
+              </a>
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant='h5' component='h2' textAlign={'center'}>
                   <b>{value.name}</b>
